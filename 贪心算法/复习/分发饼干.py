@@ -1,11 +1,17 @@
-class Solution:
-    def findContentChildren(self, g, s):
-        g.sort()  # 将孩子的贪心因子排序
-        s.sort()  # 将饼干的尺寸排序
-        index = len(s) - 1  # 饼干数组的下标，从最后一个饼干开始
-        result = 0  # 满足孩子的数量
-        for i in range(len(g)-1, -1, -1):  # 遍历胃口，从最后一个孩子开始
-            if index >= 0 and s[index] >= g[i]:  # 遍历饼干
-                result += 1
-                index -= 1
-        return result
+lass Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        # 将胃口和饼干排序
+        g.sort()
+        s.sort()
+        # 孩子的数量
+        n = len(g)
+        # 饼干的数量
+        m = len(s)
+        # 记录结果
+        res = 0 
+        for i in range(m):
+            # 从胃口小的开始喂
+            if res < n and g[res] <= s[i]:
+                res += 1
+        return res
+
